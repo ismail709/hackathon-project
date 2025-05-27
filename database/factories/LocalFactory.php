@@ -42,7 +42,7 @@ class LocalFactory extends Factory
             'image_path' => $imagePath,
             'capacite' => rand(10, 100),
             'prix' => rand(100, 1000),
-            'location' => $this->faker->address,
+            'location' => $this->faker->city(),
             'is_enabled' => true,
         ];
     }
