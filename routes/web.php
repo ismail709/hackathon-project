@@ -23,3 +23,16 @@ Route::get('/sendmail',function(){
     Mail::to('test@gmail.com')->send(new DemoMail());
     return "done";
 });
+
+
+Route::get('/location', function () {
+    return view('location.index');
+})->name('location');
+
+Route::get('/location-details', function () {
+    return view('location.location-details');
+})->name('location-details');
+
+Route::get('/location-reservation-calendar', function () {
+    return view('location.location-reservation-calendar');
+})->name('location-reservation-calendar');
