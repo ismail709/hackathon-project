@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResetPasswordController;
