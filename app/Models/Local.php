@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\LocalImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,4 +23,8 @@ class Local extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function images()
+{
+    return $this->hasMany(LocalImage::class);
+}
 }

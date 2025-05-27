@@ -6,6 +6,7 @@ use \App\Models\Category;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use \App\Models\Facture;
 use \App\Models\Local;
+use \App\Models\LocalImage;
 use \App\Models\Reservation;
 use \App\Models\User;
 use Illuminate\Database\Seeder;
@@ -30,5 +31,16 @@ class DatabaseSeeder extends Seeder
         Reservation::factory(30)->create()->each(function ($reservation) {
             Facture::factory()->create(['reservation_id' => $reservation->id]);
         });
+
+        Local::factory(5)->create()->each(function ($local) {
+    // Create 1 to 5 images for each local
+    $imagesCount = rand(1, 5);
+    for ($i = 0; $i < $imagesCount; $i++) {
+        LocalImage::factory()->create([
+            'local_id' => $local->id,
+        ]);
+    }
+});
+
     }
 }
