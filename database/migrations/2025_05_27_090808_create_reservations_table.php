@@ -21,6 +21,7 @@ return new class extends Migration
             $table->time('heure');
             $table->integer('duree');
             $table->integer('people_nbr');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
