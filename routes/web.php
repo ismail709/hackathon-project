@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResetPasswordController;
@@ -61,27 +62,5 @@ Route::get('/sendmail', function () {
     return "done";
 });
 
-
-Route::get('/location', function () {
-    return view('location.index');
-})->name('location');
-
-Route::get('/location-details', function () {
-    return view('location.location-details');
-})->name('location-details');
-
-Route::get('/location-reservation-calendar', function () {
-    return view('location.location-reservation-calendar');
-})->name('location-reservation-calendar');
-
-Route::get('/user-dashboard-profile', function () {
-    return view('user-dashboard.user-profile');
-})->name('user-dashboard-profile');
-
-Route::get('/user-dashboard-reservations', function () {
-    return view('user-dashboard.user-reservations');
-})->name('user-dashboard-reservations');
-
-Route::get('/user-dashboard-invoices', function () {
-    return view('user-dashboard.user-invoices');
-})->name('user-dashboard-invoices');
+Route::get('/factures/{facture}/download-pdf', [FactureController::class, 'download'])
+    ->name('factures.download-pdf')->middleware('auth');

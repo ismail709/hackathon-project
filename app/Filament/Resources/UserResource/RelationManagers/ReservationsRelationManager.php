@@ -1,33 +1,24 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Enums\ReservationStatusEnum;
-use App\Filament\Resources\ReservationResource\Pages;
-use App\Filament\Resources\ReservationResource\RelationManagers;
-use App\Filament\Resources\ReservationResource\RelationManagers\FactureRelationManager;
-use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ReservationResource extends Resource
+class ReservationsRelationManager extends RelationManager
 {
-    protected static ?string $model = Reservation::class;
+    protected static string $relationship = 'reservations';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user','name')
-                    ->required(),
                 Forms\Components\Select::make('local_id')
                     ->relationship('local','id')
                     ->required(),
@@ -39,19 +30,20 @@ class ReservationResource extends Resource
                 Forms\Components\TextInput::make('duree')
                     ->required()
                     ->numeric(),
+                Forms\Components\TextInput::make('people_nbr')
+                    ->required()
+                    ->numeric(),
                 Forms\Components\Select::make('status')
                     ->options(ReservationStatusEnum::class)
                     ->required(),
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
+            ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('local_id')
                     ->numeric()
                     ->sortable(),
@@ -72,57 +64,21 @@ class ReservationResource extends Resource
                         ReservationStatusEnum::CANCELLED->value     => 'danger',
                         default                 => 'success',
                     }),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
-            ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            FactureRelationManager::class
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListReservations::route('/'),
-            'create' => Pages\CreateReservation::route('/create'),
-            'view' => Pages\ViewReservation::route('/{record}'),
-            'edit' => Pages\EditReservation::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
             ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LocalResource\Pages;
 use App\Filament\Resources\LocalResource\RelationManagers;
+use App\Filament\Resources\LocalResource\RelationManagers\ImagesRelationManager;
 use App\Models\Local;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,9 +24,9 @@ class LocalResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category','name')
+                    ->required(),
                 Forms\Components\TextInput::make('type')
                     ->required()
                     ->maxLength(255),
@@ -49,17 +50,16 @@ class LocalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('category.name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image_path'),
                 Tables\Columns\TextColumn::make('capacite')
                     ->numeric()
+                    ->suffix(' people')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('prix')
-                    ->numeric()
+                    Tables\Columns\TextColumn::make('prix')
+                    ->money('MAD')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable(),
@@ -97,7 +97,7 @@ class LocalResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ImagesRelationManager::class
         ];
     }
 
