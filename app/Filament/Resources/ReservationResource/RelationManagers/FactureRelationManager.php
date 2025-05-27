@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ReservationResource\RelationManagers;
 
 use App\Enums\FactureStatusEnum;
+use App\Models\Facture;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -53,6 +54,12 @@ class FactureRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('downloadPdf')
+                    ->label('Download PDF')
+                    ->icon('heroicon-o-arrow-down-tray') // A suitable download icon
+                    ->color('info') // Choose a color for the button
+                    ->url(fn (Facture $record): string => route('factures.download-pdf', $record)) // Generate the URL
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -71,6 +71,12 @@ class FactureResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('downloadPdf')
+                    ->label('Download PDF')
+                    ->icon('heroicon-o-arrow-down-tray') // A suitable download icon
+                    ->color('info') // Choose a color for the button
+                    ->url(fn (Facture $record): string => route('factures.download-pdf', $record)) // Generate the URL
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

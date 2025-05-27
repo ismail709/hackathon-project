@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\ReservationController;
 use App\Mail\DemoMail;
 use Illuminate\Support\Facades\Mail;
@@ -25,3 +26,6 @@ Route::get('/sendmail',function(){
     Mail::to('test@gmail.com')->send(new DemoMail());
     return "done";
 });
+
+Route::get('/factures/{facture}/download-pdf', [FactureController::class, 'download'])
+    ->name('factures.download-pdf')->middleware('auth');
