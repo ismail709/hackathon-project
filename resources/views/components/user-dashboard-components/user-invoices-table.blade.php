@@ -26,7 +26,7 @@
             @endif
         </td>
         <td class="px-4 py-3 flex flex-row flex-nowrap gap-2 justify-center items-center">
-            <a href="">
+            <a href="{{ route('factures.download-pdf', $facture) }}">
                 <button class="bg-red-500 text-white py-2 px-3 text-nowrap rounded-md text-sm">Télécharger PDF</button>
             </a>
             @if($facture->status !== 'paid')
