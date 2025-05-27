@@ -23,7 +23,7 @@
             Mon Espace
         </a>
 
-        
+
 
         <!-- Hamburger (Tablet & Mobile) -->
         <button id="menu-btn" class="lg:hidden cursor-pointer text-[[#db571b]] text-2xl focus:outline-none">
