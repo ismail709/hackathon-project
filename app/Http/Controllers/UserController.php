@@ -17,26 +17,40 @@ class UserController extends Controller
     }
 
     // Update user profile
-    public function update(Request $request)
-    {
-        $user = Auth::user();
+public function update(Request $request)
+{
+    $user = Auth::user();
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => ['required','email','max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => 'nullable|string|min:8|confirmed',
-        ]);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+    ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->save();
 
-        // Only update password if filled
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
+    return back()->with('success', 'Profil mis à jour avec succès.');
+}
 
-        $user->save();
+public function updatePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => ['required'],
+        'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+    ]);
 
-        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
+    $user = Auth::user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
     }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return back()->with('success', 'Mot de passe mis à jour avec succès.');
+}
+
+
 }

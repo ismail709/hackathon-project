@@ -5,9 +5,11 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserDashboardController;
 use App\Mail\DemoMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::middleware('guest')->group(function () {
@@ -36,10 +38,17 @@ Route::middleware('auth')->group(function () {
     //     Route::get('/location-reservation-calendar', function () {
     //     return view('location.location-reservation-calendar');
     // })->name('location-reservation-calendar');
+Route::get('/mon_espace', [UserDashboardController::class, 'profile'])->name('mon_espace');
+Route::get('/invoices', [UserDashboardController::class, 'invoices'])->name('invoices');
+Route::get('/reservations', [UserDashboardController::class, 'reservations'])->name('reservations');
+Route::put('/update-profile', [UserController::class, 'update'])->name('profile.update');
+Route::put('/update-password', [UserController::class, 'updatePassword'])->name('password.update');
+
+
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::resource('reservations', ReservationController::class);
+    // Route::resource('reservations', ReservationController::class);
     Route::fallback(function () {
         return redirect('/');
     });

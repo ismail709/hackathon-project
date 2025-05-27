@@ -19,7 +19,7 @@
         </nav>
 
         <!-- Contact Button (Desktop) -->
-        <a href="" class="hidden lg:inline-block bg-[#db571b] text-white text-lg px-4 py-2 rounded-md font-medium whitespace-nowrap transition-all duration-300 hover:opacity-90">
+        <a href="{{ route('mon_espace') }}" class="hidden lg:inline-block bg-[#db571b] text-white text-lg px-4 py-2 rounded-md font-medium whitespace-nowrap transition-all duration-300 hover:opacity-90">
             Mon Espace
         </a>
 

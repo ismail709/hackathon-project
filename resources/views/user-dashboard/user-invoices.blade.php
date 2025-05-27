@@ -4,7 +4,7 @@
 <div class="flex flex-col md:flex-row justify-center mt-[80px] gap-6 px-4">
 
     <x-user-dashboard-components.sidebar/>
-    <x-user-dashboard-components.user-invoices-table/>
+    <x-user-dashboard-components.user-invoices-table :factures="$factures" />
 
 </div>
 @endsection
