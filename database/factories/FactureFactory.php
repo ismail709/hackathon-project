@@ -17,10 +17,10 @@ class FactureFactory extends Factory
      */
     public function definition(): array
     {
-return [
-    'reservation_id' => Reservation::factory(),
-    'montant' => rand(200, 5000),
-    'status' => $this->faker->randomElement(['paid', 'unpaid']),
-];
+        return [
+            'reservation_id' => Reservation::factory(),
+            'montant' => rand(200, 5000),
+            'status' => $this->faker->randomElement(['paid', 'unpaid']),
+        ];
     }
 }

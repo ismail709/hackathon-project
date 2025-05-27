@@ -18,14 +18,14 @@ class ReservationFactory extends Factory
      */
     public function definition(): array
     {
-return [
-    'user_id' => User::factory(),
-    'local_id' => Local::factory(),
-    'date' => $this->faker->dateTimeBetween('+1 days', '+1 month')->format('Y-m-d'),
-    'heure' => $this->faker->time(),
-    'duree' => rand(1, 4),
-    'people_nbr' => rand(2, 30),
-    'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled','completed']),
-];
+        return [
+            'user_id' => User::factory(),
+            'local_id' => Local::factory(),
+            'date' => $this->faker->dateTimeBetween('+1 days', '+1 month')->format('Y-m-d'),
+            'heure' => $this->faker->time(),
+            'duree' => rand(1, 4),
+            'people_nbr' => rand(2, 30),
+            'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled', 'completed']),
+        ];
     }
 }
