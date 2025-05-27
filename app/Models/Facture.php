@@ -10,4 +10,11 @@ class Facture extends Model
 {
     /** @use HasFactory<\Database\Factories\FactureFactory> */
     use HasFactory,SoftDeletes;
+
+    protected $fillable = ['reservation_id', 'montant', 'status'];
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
 }
