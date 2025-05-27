@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\ReservationStatusEnum;
 use App\Filament\Resources\ReservationResource\Pages;
 use App\Filament\Resources\ReservationResource\RelationManagers;
+use App\Filament\Resources\ReservationResource\RelationManagers\FactureRelationManager;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -103,7 +104,7 @@ class ReservationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            FactureRelationManager::class
         ];
     }
 
