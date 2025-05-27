@@ -2,6 +2,12 @@
 <div data-aos="zoom-in" class="bg-[#f8d5b0] w-full md:w-2/3 p-8 rounded-xl shadow-md min-h-[550px] flex flex-col justify-center">
     <div>
         <h1 class="text-3xl font-bold text-[#db571b] mb-8 text-left">Profile</h1>
+
+            @if($errors->any())
+            @foreach ($errors->all() as $error)
+            <p class="mb-2">{{ $error }}</p>
+            @endforeach
+    @endif
 <form action="{{ route('profile.update') }}" method="POST" class="space-y-6">
     @csrf
     @method('PUT')
@@ -18,12 +24,6 @@
         </button>
     </div>
 </form>
-
-    </div>
-</div>
-
-
-<!-- Password Update Section -->
 <form action="{{ route('password.update') }}" method="POST" class="space-y-6 mt-10">
     @csrf
     @method('PUT')
@@ -44,3 +44,9 @@
         </button>
     </div>
 </form>
+
+    </div>
+</div>
+
+
+<!-- Password Update Section -->
