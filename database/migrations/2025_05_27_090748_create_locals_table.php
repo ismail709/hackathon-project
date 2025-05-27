@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('capacite');
             $table->integer('prix');
             $table->string('location');
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }
