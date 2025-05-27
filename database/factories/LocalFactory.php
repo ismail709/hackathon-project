@@ -38,7 +38,6 @@ class LocalFactory extends Factory
 
         return [
             'category_id' => Category::factory(),
-            'type' => $this->faker->word,
             'image_path' => $imagePath,
             'capacite' => rand(10, 100),
             'prix' => rand(100, 1000),
