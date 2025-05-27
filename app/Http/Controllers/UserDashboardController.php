@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Facture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
@@ -26,6 +27,7 @@ class UserDashboardController extends Controller
 
     public function reservations()
     {
-        return view('user-dashboard.user-reservations');
+            $reservations = Auth::user()->reservations()->with('local')->latest()->get();
+        return view('user-dashboard.user-reservations',compact('reservations'));
     }
 }

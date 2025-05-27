@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/mon_espace', [UserDashboardController::class, 'profile'])->name('mon_espace');
 Route::get('/invoices', [UserDashboardController::class, 'invoices'])->name('invoices');
 Route::get('/reservations', [UserDashboardController::class, 'reservations'])->name('reservations');
+Route::patch('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
 Route::put('/update-profile', [UserController::class, 'update'])->name('profile.update');
 Route::put('/update-password', [UserController::class, 'updatePassword'])->name('password.update');
 

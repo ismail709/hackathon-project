@@ -25,7 +25,7 @@ class ReservationFactory extends Factory
             'heure' => $this->faker->time(),
             'duree' => rand(1, 4),
             'people_nbr' => rand(2, 30),
-            'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled', 'completed']),
+            'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled', 'completed','checked-in','checked-out']),
         ];
     }
 }
