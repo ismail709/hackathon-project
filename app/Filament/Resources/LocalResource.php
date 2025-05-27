@@ -27,17 +27,16 @@ class LocalResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->relationship('category','name')
                     ->required(),
-                Forms\Components\TextInput::make('type')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\FileUpload::make('image_path')
                     ->image(),
                 Forms\Components\TextInput::make('capacite')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
                 Forms\Components\TextInput::make('prix')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
                 Forms\Components\TextInput::make('location')
                     ->required()
                     ->maxLength(255),

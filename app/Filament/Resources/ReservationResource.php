@@ -32,13 +32,19 @@ class ReservationResource extends Resource
                     ->relationship('local','id')
                     ->required(),
                 Forms\Components\DatePicker::make('date')
-                    ->required(),
+                    ->required()
+                    ->minDate(now()),
                 Forms\Components\TimePicker::make('heure')
                     ->seconds(false)
                     ->required(),
                 Forms\Components\TextInput::make('duree')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
+                Forms\Components\TextInput::make('people_nbr')
+                    ->required()
+                    ->numeric()
+                    ->minValue(1),
                 Forms\Components\Select::make('status')
                     ->options(ReservationStatusEnum::class)
                     ->required(),
@@ -63,12 +69,16 @@ class ReservationResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->suffix(' days'),
+                Tables\Columns\TextColumn::make('people_nbr')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn ($state) => match($state){
                         ReservationStatusEnum::PENDING->value     => 'warning',
                         ReservationStatusEnum::CONFIRMED->value     => 'warning',
-                        ReservationStatusEnum::COMPLETED->value     => 'success',
+                        ReservationStatusEnum::CHECKEDIN->value     => 'success',
+                        ReservationStatusEnum::CHECKEDOUT->value     => 'success',
                         ReservationStatusEnum::CANCELLED->value     => 'danger',
                         default                 => 'success',
                     }),

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\ReservationResource\RelationManagers;
+namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Enums\FactureStatusEnum;
-use App\Models\Facture;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -12,14 +11,16 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class FactureRelationManager extends RelationManager
+class FacturesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'facture';
+    protected static string $relationship = 'factures';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('reservation_id')
+                    ->relationship('reservation','id'),
                 Forms\Components\TextInput::make('montant')
                     ->required()
                     ->numeric(),
@@ -49,18 +50,11 @@ class FactureRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
-                ->hidden(fn () => $this->ownerRecord->facture?->exists()),
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\Action::make('downloadPdf')
-                    ->label('Download PDF')
-                    ->icon('heroicon-o-arrow-down-tray') // A suitable download icon
-                    ->color('info') // Choose a color for the button
-                    ->url(fn (Facture $record): string => route('factures.download-pdf', $record)) // Generate the URL
-                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
