@@ -4,9 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Facture extends Model
 {
     /** @use HasFactory<\Database\Factories\FactureFactory> */
-    use HasFactory;
+    use HasFactory,SoftDeletes;
+
+    protected $fillable = ['reservation_id', 'montant', 'status'];
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
 }
