@@ -11,7 +11,7 @@ class Local extends Model
     /** @use HasFactory<\Database\Factories\LocalFactory> */
     use HasFactory, SoftDeletes;
 
-        protected $fillable = ['type', 'capacite', 'prix', 'location', 'is_enabled', 'category_id'];
+        protected $fillable = ['type', 'capacite', 'prix', 'location', 'is_enabled', 'category_id','image_path'];
 
     public function reservations()
     {
