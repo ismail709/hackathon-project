@@ -10,15 +10,13 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::middleware('guest')->group(function () {
+
+
+
+    Route::get('/location-reservation-calendar', function () {
+        return view('location.location-reservation-calendar');
+    })->name('location-reservation-calendar');
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -34,6 +32,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [AuthController::class, 'location'])->name('location');
+    Route::get('/location-details/{id}', [AuthController::class, 'locationDetails'])->name('location-details');
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -49,16 +49,3 @@ Route::get('/sendmail', function () {
     Mail::to('test@gmail.com')->send(new DemoMail());
     return "done";
 });
-
-
-Route::get('/location', function () {
-    return view('location.index');
-})->name('location');
-
-Route::get('/location-details', function () {
-    return view('location.location-details');
-})->name('location-details');
-
-Route::get('/location-reservation-calendar', function () {
-    return view('location.location-reservation-calendar');
-})->name('location-reservation-calendar');
