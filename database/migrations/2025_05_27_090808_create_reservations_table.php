@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('heure');
             $table->integer('duree');
+            $table->integer('people_nbr');
             $table->timestamps();
             $table->softDeletes();
         });
