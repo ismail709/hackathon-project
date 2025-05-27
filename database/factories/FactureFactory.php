@@ -20,7 +20,7 @@ class FactureFactory extends Factory
 return [
     'reservation_id' => Reservation::factory(),
     'montant' => rand(200, 5000),
-    'status' => $this->faker->randomElement(['paid', 'unpaid', 'pending']),
+    'status' => $this->faker->randomElement(['paid', 'unpaid']),
 ];
     }
 }
