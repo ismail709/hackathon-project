@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->string('type');
+            $table->string('image_path')->nullable();
             $table->integer('capacite');
             $table->integer('prix');
             $table->string('location');
