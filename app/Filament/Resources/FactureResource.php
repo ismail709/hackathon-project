@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\FactureStatusEnum;
 use App\Filament\Resources\FactureResource\Pages;
 use App\Filament\Resources\FactureResource\RelationManagers;
 use App\Models\Facture;
@@ -28,9 +29,9 @@ class FactureResource extends Resource
                 Forms\Components\TextInput::make('montant')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->options(FactureStatusEnum::class)
+                    ->required(),
             ]);
     }
 
@@ -45,7 +46,12 @@ class FactureResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->badge()
+                    ->color(fn ($state) => match($state){
+                        FactureStatusEnum::PAID->value     => 'success',
+                        FactureStatusEnum::UNPAID->value     => 'warning',
+                        default                 => 'success',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
