@@ -53,4 +53,15 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function factures(){
+        return $this->hasManyThrough(
+            Facture::class,       // The final model we want to access
+            Reservation::class,   // The intermediate model
+            'user_id',            // Foreign key on the reservations table...
+            'reservation_id',     // Foreign key on the factures table...
+            'id',                 // Local key on the users table...
+            'id'                  // Local key on the reservations table...
+        );
+    }
 }

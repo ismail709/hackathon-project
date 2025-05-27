@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
 use App\Enums\ReservationStatusEnum;
+use App\Filament\Resources\ReservationResource;
+use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -23,16 +25,19 @@ class ReservationsRelationManager extends RelationManager
                     ->relationship('local','id')
                     ->required(),
                 Forms\Components\DatePicker::make('date')
-                    ->required(),
+                    ->required()
+                    ->minDate(now()),
                 Forms\Components\TimePicker::make('heure')
                     ->seconds(false)
                     ->required(),
                 Forms\Components\TextInput::make('duree')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
                 Forms\Components\TextInput::make('people_nbr')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
                 Forms\Components\Select::make('status')
                     ->options(ReservationStatusEnum::class)
                     ->required(),
@@ -60,7 +65,8 @@ class ReservationsRelationManager extends RelationManager
                     ->color(fn ($state) => match($state){
                         ReservationStatusEnum::PENDING->value     => 'warning',
                         ReservationStatusEnum::CONFIRMED->value     => 'warning',
-                        ReservationStatusEnum::COMPLETED->value     => 'success',
+                        ReservationStatusEnum::CHECKEDIN->value     => 'success',
+                        ReservationStatusEnum::CHECKEDOUT->value     => 'success',
                         ReservationStatusEnum::CANCELLED->value     => 'danger',
                         default                 => 'success',
                     }),
@@ -72,6 +78,8 @@ class ReservationsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()
+                ->url(fn (Reservation $record): string => ReservationResource::getUrl('view', ['record' => $record])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

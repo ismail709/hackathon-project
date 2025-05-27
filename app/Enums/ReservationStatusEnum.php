@@ -6,6 +6,7 @@ enum ReservationStatusEnum: string
 {
     case PENDING    = 'pending';
     case CONFIRMED    = 'confirmed';
-    case COMPLETED    = 'completed';
     case CANCELLED    = 'cancelled';
+    case CHECKEDIN    = 'checked-in';
+    case CHECKEDOUT    = 'checked-out';
 }
