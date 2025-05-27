@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('location');
             $table->boolean('is_enabled')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
