@@ -50,17 +50,16 @@ class LocalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('category_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('category.name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image_path'),
                 Tables\Columns\TextColumn::make('capacite')
                     ->numeric()
+                    ->suffix(' people')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('prix')
-                    ->numeric()
+                    Tables\Columns\TextColumn::make('prix')
+                    ->money('MAD')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable(),

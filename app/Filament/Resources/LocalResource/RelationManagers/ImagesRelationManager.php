@@ -38,41 +38,6 @@ class ImagesRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
-                Action::make('upload_multiple_images')
-                    ->label('Upload Multiple Images')
-                    ->icon('heroicon-o-photo')
-                    ->modalHeading('Upload Images for Post')
-                    ->form([
-                        Forms\Components\FileUpload::make('files') // Different field name
-                            ->label('Select Images to Upload')
-                            ->image()
-                            ->multiple() // This time, multiple is correct for bulk upload
-                            ->directory('post-images')
-                            ->preserveFileNames()
-                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                            ->maxSize(5120), // 5MB
-                    ])
-                    ->action(function (array $data, \App\Models\Local $record) {
-                        if (empty($data['files'])) {
-                            Notification::make()
-                                ->title('No files selected.')
-                                ->warning()
-                                ->send();
-                            return;
-                        }
-
-                        foreach ($data['files'] as $file) {
-                            $filePath = $file->store('local-images', 'public');
-                            $record->images()->create([
-                                'image_path' => $filePath,
-                            ]);
-                        }
-
-                        Notification::make()
-                            ->title('Images uploaded successfully!')
-                            ->success()
-                            ->send();
-                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

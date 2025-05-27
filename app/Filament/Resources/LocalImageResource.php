@@ -24,7 +24,9 @@ class LocalImageResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\FileUpload::make('image_path')
+                    ->image()
+                    ->required(),
             ]);
     }
 
