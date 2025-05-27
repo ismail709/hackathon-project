@@ -23,12 +23,12 @@ class ReservationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('local_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user','name')
+                    ->required(),
+                Forms\Components\Select::make('local_id')
+                    ->relationship('local','id')
+                    ->required(),
                 Forms\Components\DatePicker::make('date')
                     ->required(),
                 Forms\Components\TimePicker::make('heure')

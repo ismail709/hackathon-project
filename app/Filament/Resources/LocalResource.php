@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LocalResource\Pages;
 use App\Filament\Resources\LocalResource\RelationManagers;
+use App\Filament\Resources\LocalResource\RelationManagers\ImagesRelationManager;
 use App\Models\Local;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,9 +24,9 @@ class LocalResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('category_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category','name')
+                    ->required(),
                 Forms\Components\TextInput::make('type')
                     ->required()
                     ->maxLength(255),
@@ -97,7 +98,7 @@ class LocalResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ImagesRelationManager::class
         ];
     }
 
