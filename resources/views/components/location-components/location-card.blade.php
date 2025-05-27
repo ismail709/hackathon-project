@@ -9,7 +9,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -41,7 +41,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -73,7 +73,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -105,7 +105,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -137,7 +137,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -169,7 +169,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -201,7 +201,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -233,7 +233,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -265,7 +265,7 @@
             
             <!-- Image -->
             <img src="{{ asset('assets/location-image.png') }}" alt="location"
-                class="w-full h-48 object-cover rounded-t-xl ">
+                class="w-full h-full object-cover rounded-t-xl ">
 
             <!-- Content -->
             <div class="p-4 w-full space-y-2">
@@ -293,5 +293,5 @@
     </div>
 
     <!-- location PAGINATION -->
-    <x-location-components.location-pagination/>
+    <x-pagination/>
 </div>

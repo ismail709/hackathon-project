@@ -36,3 +36,15 @@ Route::get('/location-details', function () {
 Route::get('/location-reservation-calendar', function () {
     return view('location.location-reservation-calendar');
 })->name('location-reservation-calendar');
+
+Route::get('/user-dashboard-profile', function () {
+    return view('user-dashboard.user-profile');
+})->name('user-dashboard-profile');
+
+Route::get('/user-dashboard-reservations', function () {
+    return view('user-dashboard.user-reservations');
+})->name('user-dashboard-reservations');
+
+Route::get('/user-dashboard-invoices', function () {
+    return view('user-dashboard.user-invoices');
+})->name('user-dashboard-invoices');

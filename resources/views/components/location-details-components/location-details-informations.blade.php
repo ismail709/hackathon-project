@@ -1,4 +1,4 @@
-<div data-aos="zoom-in" class="lg:w-1/3 sticky top-28 bg-[#ea7025] text-white rounded-lg p-8 flex flex-col justify-between h-full">
+<div data-aos="zoom-in" class="lg:w-1/3 lg:sticky top-28 bg-[#ea7025] text-white rounded-lg p-8 flex flex-col justify-between h-full">
     <!-- Informations principales -->
     <div class="grid grid-cols-2 gap-4 text-sm font-medium">
         <div class="bg-white text-[#ea7025] px-3 py-2 rounded text-center font-semibold">
