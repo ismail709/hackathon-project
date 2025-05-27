@@ -12,7 +12,7 @@ class Reservation extends Model
     use HasFactory,SoftDeletes;
 
 
-    protected $fillable = ['user_id', 'local_id', 'date', 'heure', 'duree'];
+    protected $fillable = ['user_id', 'local_id', 'date', 'heure', 'duree', 'people_nbr','status'];
 
     public function user()
     {
