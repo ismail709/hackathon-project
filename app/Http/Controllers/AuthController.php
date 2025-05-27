@@ -126,15 +126,9 @@ class AuthController extends Controller
     $query = Local::query()->where('is_enabled', true);
 
     // Filter by category (assuming 'category' input is category name)
+    // ✅ Filter by category ID (from <select>)
     if ($request->filled('category')) {
-        // Find category id by name (case-insensitive)
-        $category = Category::where('name', 'like', '%' . $request->category . '%')->first();
-        if ($category) {
-            $query->where('category_id', $category->id);
-        } else {
-            // If no category matches, no results
-            $query->whereNull('category_id'); // or handle differently
-        }
+        $query->where('category_id', $request->category);
     }
 
     // Filter by capacity ranges (checkboxes)
@@ -166,9 +160,10 @@ class AuthController extends Controller
     }
 
     // Paginate results (6 per page)
+        $categories = Category::all();
         // Eager load category
         $locals = $query->with('category')->paginate(10)->appends($request->all());
-        return view('location.index', compact('locals'));
+        return view('location.index', compact('locals', 'categories'));
     }
 
 
@@ -180,7 +175,11 @@ class AuthController extends Controller
 public function locationDetails($id)
 {
     // Load the Local with related data
-    $local = Local::with('category', 'images', 'reservations')->findOrFail($id);
+    $local = Local::with('category', 'images', 'reservations')->find($id);
+    if (!$local) {
+        // Handle the case where the local is not found
+        back()->withErrors(['error' => 'Local not found']);
+    }
 
     // Calculate reserved spots for future (and not cancelled) reservations
     $reserved = $local->reservations()

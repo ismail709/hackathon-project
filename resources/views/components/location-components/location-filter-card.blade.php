@@ -2,12 +2,21 @@
 <form method="GET" action="{{ route('location') }}" data-aos="slide-right" class="w-full lg:w-[400px] bg-[#db571b] text-white p-10 rounded-xl space-y-6 self-start lg:sticky lg:top-28">
 
     <!-- Filtrage par Categorie -->
-    <div>
-        <label for="category" class="block font-medium mb-2 text-base">Filtrage par Catégorie</label>
-        <input type="text" id="category" name="category" placeholder="Ex : Gestion de projet"
-            value="{{ request('category') }}"
-            class="w-full px-3 py-2 rounded bg-white text-sm text-[#1d1d1d] focus:outline-none placeholder:text-gray-500" />
-    </div>
+<div>
+    <label for="category" class="block font-medium mb-2 text-base">Filtrage par Catégorie</label>
+    <select id="category" name="category"
+        class="w-full px-3 py-2 rounded bg-white text-sm text-[#1d1d1d] focus:outline-none">
+        <option value="">-- Toutes les catégories --</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}"
+                {{ request('category') == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+
 
     <!-- Filtrage par Capacite -->
     <div>
@@ -41,7 +50,7 @@
     </div>
 
     <!-- Filtrage par Localisation -->
-    <div>
+    <div style="display: none;">
         <label for="location" class="block font-medium mb-2 text-base">Filtrage par Localisation</label>
         <input type="text" id="location" name="location" placeholder="Ex : Casablanca"
             value="{{ request('location') }}"

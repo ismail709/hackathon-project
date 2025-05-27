@@ -14,9 +14,7 @@ Route::middleware('guest')->group(function () {
 
 
 
-    Route::get('/location-reservation-calendar', function () {
-        return view('location.location-reservation-calendar');
-    })->name('location-reservation-calendar');
+
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -34,6 +32,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/', [AuthController::class, 'location'])->name('location');
     Route::get('/location-details/{id}', [AuthController::class, 'locationDetails'])->name('location-details');
+        // Route::get('/location-details/{id}', [AuthController::class, 'calendar'])->name('location-details');
+    //     Route::get('/location-reservation-calendar', function () {
+    //     return view('location.location-reservation-calendar');
+    // })->name('location-reservation-calendar');
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
